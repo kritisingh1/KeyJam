@@ -1,11 +1,68 @@
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>KeyJam</title>
-  <meta name="description" content="multiplayer music playing">
-  <link rel="stylesheet" href="styles/main.css">
-</head>
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>KeyJam</title>
+      <link href="https://fonts.googleapis.com/css?family=McLaren&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="styles/welcome.css">
+   </head>
+   
+   <script src = "/socket.io/socket.io.js"></script>
+   <script>
+      var socket = io();
+      function setCreds() {
+        socket.emit('setUsername', document.getElementById('name').value);
+        var instrument = document.getElementById('inst').value;
+		if (document.getElementById('piano').checked) {
+			socket.emit('setInstrument', document.getElementById('piano').value);
+		}
+		if (document.getElementById('drums').checked) {
+			socket.emit('setInstrument', document.getElementById('drums').value);
+		}
+		if (document.getElementById('guitar').checked) {
+			socket.emit('setInstrument', document.getElementById('guitar').value);
+		}
+         
+      };
+      var user;
+      socket.on('userExists', function(data) {
+         document.getElementById('error-container').innerHTML = data;
+      });
+      socket.on('userSet', function(data) {
+         user = data.username;
+         /*document.body.innerHTML = '<input type = "text" id = "message">\
+         <button type = "button" name = "button" onclick = "sendMessage()">Send</button>\
+         <div id = "message-container"></div>';*/
+
+      });
+      function sendMessage() {
+         var msg = document.getElementById('message').value;
+         if(msg) {
+            socket.emit('msg', {message: msg, user: user});
+         }
+      }
+      socket.on('newmsg', function(data) {
+         if(user) {
+            document.getElementById('message-container').innerHTML += '<div><b>' + 
+               data.user + '</b>: ' + data.message + '</div>'
+         }
+      })
+   </script>
+   
 <body>
-    Bhangda
+  <div id = "error-container"></div>
+  <div id="title">KeyJam</div>
+  <div id = "user-details">
+      <input id = "name" type = "text" name = "name" value = "" 
+      placeholder = "Enter your name!">
+       <p>Please select instrument:</p>
+       <div id = "inst">
+         <input type="radio" name="instrument" value="Piano" id="piano"> Piano<br>
+         <input type="radio" name="instrument" value="Drums" id="drums"> Drums<br>
+         <input type="radio" name="instrument" value="Guitar" id="guitar"> Guitar<br>  
+       </div>
+       <br>
+    <button type = "button" id="jn-btn" name = "button" onclick = "setCreds()">
+      Join
+  </div>
 </body>
 </html>

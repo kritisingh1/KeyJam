@@ -8,7 +8,7 @@ app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
-app.get('/apple', function(req, res) {
+app.get('/', function(req, res) {
 	res.render('welcome.html')
 })
 
@@ -45,10 +45,6 @@ io.on('connection', function(socket) {
       //Send message to everyone
       io.sockets.emit('newmsg', data);
    	})
-
-	socket.on('play', function(data) {
-		const id = socket.id;
-		socket.broadcast.emit('play', data);
 
 	socket.on('play-piano', function(data) {
 		socket.broadcast.emit('play-piano', data);

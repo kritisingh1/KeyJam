@@ -1,0 +1,26 @@
+body {
+    height: 100vh;
+    background-color: aqua;
+    overflow: hidden;
+}
+
+#user-details {
+	position: absolute;
+    top: 50%;
+    margin-left: 40vw;
+	transform: translateY(-50%);
+}
+
+#jn-btn {
+    width: 80px;
+    margin-left: 40px;
+}
+
+#title {
+    font-size: 3rem;
+    font-family: 'McLaren', cursive;
+    position: relative;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-10%);
+}
