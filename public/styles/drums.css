@@ -1,0 +1,7 @@
+body {
+	overflow: auto;
+	background-image: url('../assets/DrumsBg.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}

@@ -8,8 +8,9 @@
    
    <script src = "/socket.io/socket.io.js"></script>
    <script>
-      var socket = io();
+      var socket = io('/welcome');
       function setCreds() {
+         /*
         socket.emit('setUsername', document.getElementById('name').value);
         var instrument = document.getElementById('inst').value;
 		if (document.getElementById('piano').checked) {
@@ -32,8 +33,16 @@
          /*document.body.innerHTML = '<input type = "text" id = "message">\
          <button type = "button" name = "button" onclick = "sendMessage()">Send</button>\
          <div id = "message-container"></div>';*/
+         let instrument = null;
+         if (document.getElementById('guitar').checked) instrument = 'guitar';
+         else if (document.getElementById('piano').checked) instrument = 'piano';
+         else if (document.getElementById('drums').checked) instrument = 'drums';
+         document.getElementById('instrument-val-id').value = instrument;
+         document.getElementById('frm').submit();
+         if (!instrument) return;
 
-      });
+      }
+
       function sendMessage() {
          var msg = document.getElementById('message').value;
          if(msg) {
@@ -56,12 +65,15 @@
       placeholder = "Enter your name!">
        <p>Please select instrument:</p>
        <div id = "inst">
-         <input type="radio" name="instrument" value="Piano" id="piano"> Piano<br>
-         <input type="radio" name="instrument" value="Drums" id="drums"> Drums<br>
-         <input type="radio" name="instrument" value="Guitar" id="guitar"> Guitar<br>  
+            <form method="GET" action="/jam" id="frm">
+               <input type="radio" name="instrument" value="Piano" id="piano"> Piano<br>
+               <input type="radio" name="instrument" value="Drums" id="drums"> Drums<br>
+               <input type="radio" name="instrument" value="Guitar" id="guitar"> Guitar<br>  
+               <input hidden name="instrument_val" id="instrument-val-id">
+            </form>
        </div>
        <br>
-    <button type = "button" id="jn-btn" name = "button" onclick = "setCreds()">
+      <button type = "button" id="jn-btn" name = "button" onclick = "setCreds()">
       Join
   </div>
 </body>

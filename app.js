@@ -12,9 +12,13 @@ app.get('/', function(req, res) {
 	res.render('welcome.html')
 })
 
-app.get('/jam', function(req, res) {
-   res.render('index.html');
-});
+app.get('/piano', function(req, res) {
+	return res.render('piano.html');
+})
+
+app.get('/drums', function(req, res) {
+	return res.render('drums.html');
+})
 
 var users = new Array();
 var userInstruments = new Array();
@@ -48,6 +52,10 @@ io.on('connection', function(socket) {
 
 	socket.on('play-piano', function(data) {
 		socket.broadcast.emit('play-piano', data);
+	})
+
+	socket.on('play-drums', function(data) {
+		socket.broadcast.emit('play-drums', data);
 	})
 
 	socket.on('disconnect', function() {

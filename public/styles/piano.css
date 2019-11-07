@@ -1,8 +1,9 @@
 body {
-    overflow: auto;
-    background-image: url("../images/DrumsBg.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+	overflow: auto;
+	background-image: url('../assets/PianoBg.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
 }
 
 #piano {
