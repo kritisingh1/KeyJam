@@ -19,7 +19,23 @@ function playPiano(note) {
     piano.play(note[0], note[1], 2.5);
 }
 
+function hideRemote(key) {
+    key.className =  key.className.replace(' remote-active', '');
+}
+
+function displayRemote(key) {
+    key.className += ' remote-active';
+    setTimeout(function(){ hideRemote(key); }, 1000);
+}
+
 socket.on('play-piano', function(data) {
     const note = data.note;
-    playPiano(note);
+    const dataattr = note[0] + '-' + note[1];
+    for (let key of $('#piano .key')) {
+        if (key.dataset.key === dataattr) {
+            displayRemote(key);
+            playPiano(note);
+            break;
+        }
+    }
 });
