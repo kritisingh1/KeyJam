@@ -6,9 +6,12 @@ app.get('/', function(req, res) {
    res.sendfile('index.html');
 });
 
-users = [];
+var users = new Array();
+var userInstruments = new Array();
+
 io.on('connection', function(socket) {
 	console.log('A user connected');
+
 	socket.on('setUsername', function(data) {
 		console.log(data);
 		
@@ -18,6 +21,14 @@ io.on('connection', function(socket) {
 		 users.push(data);
 		 socket.emit('userSet', {username: data});
 		}
+   	});
+
+   	socket.on('setInstrument', function(data) {
+   		console.log(data);
+
+   		userInstruments.push(data);
+   		socket.emit('instrumentSet', {userInstrument: data});
+
    	});
 
 	socket.on('msg', function(data) {
