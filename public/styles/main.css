@@ -1,5 +1,8 @@
 body {
     overflow: auto;
+    background-image: url("../images/DrumsBg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #piano {
