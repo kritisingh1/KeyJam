@@ -1,6 +1,8 @@
 body {
     height: 100vh;
-    background-color: aqua;
+    background-image: url("../images/mainbg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     overflow: hidden;
 }
 
@@ -14,6 +16,18 @@ body {
 #jn-btn {
     width: 80px;
     margin-left: 40px;
+}
+
+#para {
+    color: white;
+}
+
+p {
+    color: white;
+}
+
+#inst {
+    color: white;
 }
 
 #title {
